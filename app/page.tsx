@@ -25,7 +25,7 @@ export default async function Home() {
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
-                Versterk je gebed met{' '}
+               Luisteren naar 100+ christelijke meditaties & gebeden met{' '}
                 <span className="text-[#60c4ff]">
                   FaithFlow
                 </span>
