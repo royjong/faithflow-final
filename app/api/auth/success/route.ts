@@ -26,7 +26,7 @@ export async function GET() {
             });
         }
 
-        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/dashboard`);
+        return NextResponse.redirect(`https://main.d2q2f4v2d6ezrm.amplifyapp.com/dashboard`);
     } catch (error) {
         console.error('Error in authentication success:', error);
         return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
