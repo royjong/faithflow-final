@@ -68,7 +68,9 @@ export default async function Home() {
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">Wat is SpiritSounds</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
+            Wat is <span className="text-[#60c4ff]">SpiritSounds</span>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {[
               { icon: Headphones, title: "Geleid bidden", description: "Laat je leiden door inspirerende stemmen die je helpen je gedachten te richten." },
@@ -90,31 +92,30 @@ export default async function Home() {
       {/* Testimonials Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">Wat onze gebruikers zeggen</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
+            Wat onze <span className="text-[#60c4ff]">gebruikers</span> zeggen
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: "Anna B.", quote: "SpiritSounds heeft mijn gebedsleven compleet getransformeerd. Ik voel me elke dag dichter bij God." },
               { name: "Martijn V.", quote: "De geleide meditaties helpen me om rust te vinden in mijn drukke leven. Een echte zegen!" },
               { name: "Lisa K.", quote: "De Bijbelstudies zijn diepgaand en inzichtelijk. Ik leer elke dag iets nieuws over mijn geloof." }
             ].map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md transition-transform hover:-translate-y-1 duration-300">
                 <div className="flex items-center mb-4">
-                  <Star className="h-5 w-5 text-yellow-400" />
-                  <Star className="h-5 w-5 text-yellow-400" />
-                  <Star className="h-5 w-5 text-yellow-400" />
-                  <Star className="h-5 w-5 text-yellow-400" />
-                  <Star className="h-5 w-5 text-yellow-400" />
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400" />
+                  ))}
                 </div>
-                <p className="text-gray-600 mb-4">"{testimonial.quote}"</p>
+                <p className="text-gray-600 mb-4 italic">"{testimonial.quote}"</p>
                 <p className="font-semibold text-gray-900">- {testimonial.name}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#60c4ff] text-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#60c4ff] to-blue-600 text-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {[
@@ -122,8 +123,10 @@ export default async function Home() {
               { icon: Headphones, value: "500+", label: "Unieke gebeden & meditaties" },
               { icon: Zap, value: "1M+", label: "Minuten beluisterd" }
             ].map((stat, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <stat.icon className="h-12 w-12 mb-4" />
+              <div key={index} className="flex flex-col items-center group">
+                <div className="bg-white p-4 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="h-12 w-12 text-[#60c4ff]" />
+                </div>
                 <h3 className="text-4xl font-bold mb-2">{stat.value}</h3>
                 <p className="text-lg">{stat.label}</p>
               </div>
@@ -137,10 +140,10 @@ export default async function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Klaar om je gebedsleven te verdiepen?</h2>
           <p className="text-xl mb-10">Begin vandaag nog met SpiritSounds en ontdek de kracht van begeleide gebeden en meditaties.</p>
-          <Button size="lg" className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 transition shadow-lg text-lg py-3 px-8">
+          <Button size="lg" className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 transition shadow-lg text-lg py-3 px-8 group">
             <Link href="/api/auth/login" className="flex items-center justify-center">
               Start je gratis proefperiode
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
         </div>
