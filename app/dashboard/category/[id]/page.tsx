@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { getDynamicIcon } from '@/utils/iconUtils';
-import prisma from '@/lib/db';
+import prisma from '@/app/lib/db';
 import CategoryClient from './CategoryClient';
 import { ArrowLeft } from 'lucide-react';
 
