@@ -24,7 +24,7 @@ export default async function Home() {
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
-              Ontdek  <span className="text-[#60c4ff]">100+ christelijke en gebeden meditaties</span>  op SpiritSounds.
+              Ontdek  <span className="text-[#60c4ff]">100+ christelijke gebeden en meditaties</span>  op SpiritSounds.
               </h1>
               <p className="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto lg:mx-0">
                 Ontdek honderden begeleide gebeden en meditaties voor elke gelegenheid, en verdiep je spirituele reis.
