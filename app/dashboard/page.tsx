@@ -34,7 +34,7 @@ export default async function Dashboard() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welkom bij FaithFlow{user?.given_name ? `, ${user.given_name}` : ''}
+            Welkom bij SpiritSounds{user?.given_name ? `, ${user.given_name}` : ''}
           </h1>
           <p className="text-md text-gray-400">Versterk je gebed, verdiep je geloof</p>
         </div>

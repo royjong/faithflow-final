@@ -26,7 +26,7 @@ export default async function Home() {
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
               <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold mb-6 leading-tight tracking-tight text-gray-900">
                Beluister 100+ <span className="text-[#60c4ff]"> christelijke meditaties & gebeden</span> met
-               PrayStream
+               SpiritSounds
               </h1>
               <p className="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl">
                 Ontdek honderden begeleide gebeden en meditaties voor elke gelegenheid, en verdiep je spirituele reis.
@@ -110,7 +110,7 @@ export default async function Home() {
             <div>
               <Link href="/" className="flex items-center space-x-2">
                 <Image src='/faithflow.png' width={40} height={40} alt='FaithFlow logo' className="w-10 h-10" />
-                <span className="text-xl font-bold text-gray-900">FaithFlow</span>
+                <span className="text-xl font-bold text-gray-900">SpiritSounds</span>
               </Link>
               <p className="mt-2 text-sm">Versterk je gebed, verdiep je geloof.</p>
             </div>
@@ -140,7 +140,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} PrayStream. Alle rechten voorbehouden.</p>
+            <p>&copy; {new Date().getFullYear()} SpiritSounds. Alle rechten voorbehouden.</p>
           </div>
         </div>
       </footer>
