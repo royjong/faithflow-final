@@ -28,7 +28,8 @@ export async function GET() {
 
         return NextResponse.redirect(`https://main.d2q2f4v2d6ezrm.amplifyapp.com/dashboard`);
     } catch (error) {
-        console.error('Error in authentication success:', error);
+        console.error('Error in authentication success:', error.message || error);
+        console.error('Error stack:', error.stack);
         return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
     }
 }
