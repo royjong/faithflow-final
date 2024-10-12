@@ -1,101 +1,149 @@
-import Image from "next/image";
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight, Headphones, Book, Heart, Play } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import Header from './components/Header'
+import AudioPlayer from './components/audioPlayer'
+import prisma from './lib/db'
 
-export default function Home() {
+export default async function Home() {
+  const randomPrayer = await prisma.prayer.findFirst({
+    orderBy: { id: 'asc' }
+  });
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="flex flex-col w-full min-h-screen  text-gray-900">
+      
+      <div className="absolute top-0 -z-10 h-full w-full bg-white"><div className="absolute bottom-auto left-auto right-0 top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div></div>
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 sm:py-32 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
+            <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
+              <h1 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
+                Versterk je gebed met{' '}
+                <span className="text-[#60c4ff]">
+                  FaithFlow
+                </span>
+              </h1>
+              <p className="text-xl mb-10 text-gray-600 max-w-2xl">
+                Ontdek honderden begeleide gebeden en meditaties voor elke gelegenheid, en verdiep je spirituele reis.
+              </p>
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <Button size="lg" className="bg-[#60c4ff] text-white hover:bg-blue-600 transition shadow-lg">
+                  <Link href="/api/auth/login" className="flex items-center">
+                    Start gratis proefperiode
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-[#60c4ff] text-[#60c4ff] hover:bg-blue-50 transition shadow-lg">
+                  <Link href="/learn-more" className="flex items-center">
+                    Bekijk Bibliotheek
+                    <Play className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 relative">
+              <div className="relative w-full max-w-lg mx-auto">
+                <Image 
+                  src="https://i.ibb.co/61PNTC9/Scherm-afbeelding-2024-10-10-om-04-35-10.png" 
+                  alt="FaithFlow App Showcase" 
+                  width={600} 
+                  height={400} 
+                  className="rounded-2xl shadow-2xl"
+                />
+                {randomPrayer && (
+                  <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-xl w-full max-w-sm">
+                    <h3 className="text-lg font-semibold mb-2 truncate">{randomPrayer.title}</h3>
+                    <AudioPlayer audioSrc={randomPrayer.audioUrl} compact={true} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">Wat is FaithFlow</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { icon: Headphones, title: "Geleid bidden", description: "Laat je leiden door inspirerende stemmen die je helpen je gedachten te richten." },
+              { icon: Heart, title: "Geleide meditaties", description: "Vind rust en verbinding met God door zorgvuldig samengestelde christelijke meditaties." },
+              { icon: Book, title: "Bijbelstudie", description: "Verdiep je kennis van de Schrift met onze audio-begeleide Bijbelstudies." }
+            ].map((feature, index) => (
+              <div key={index} className="flex flex-col items-center text-center">
+                <div className="bg-[#60c4ff] p-4 rounded-full mb-6">
+                  <feature.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-[#60c4ff] text-white py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6">Klaar om je gebedsleven te verdiepen?</h2>
+          <p className="text-xl mb-10">Begin vandaag nog met FaithFlow en ontdek de kracht van begeleide gebeden en meditaties.</p>
+          <Button size="lg" className="bg-white text-[#60c4ff] hover:bg-gray-100 transition shadow-lg">
+            <Link href="/api/auth/login" className="flex items-center">
+              Start je gratis proefperiode
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-white text-gray-600 py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+              <Link href="/" className="flex items-center space-x-2">
+                <Image src='/faithflow.png' width={40} height={40} alt='FaithFlow logo' className="w-10 h-10" />
+                <span className="text-xl font-bold text-gray-900">FaithFlow</span>
+              </Link>
+              <p className="mt-2 text-sm">Versterk je gebed, verdiep je geloof.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-gray-900">Navigatie</h3>
+              <ul className="space-y-2">
+                <li><Link href="/gebeden" className="hover:text-[#60c4ff] transition">Gebeden</Link></li>
+                <li><Link href="/meditaties" className="hover:text-[#60c4ff] transition">Meditaties</Link></li>
+                <li><Link href="/bijbelstudies" className="hover:text-[#60c4ff] transition">Bijbelstudies</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-gray-900">Ondersteuning</h3>
+              <ul className="space-y-2">
+                <li><Link href="/faq" className="hover:text-[#60c4ff] transition">FAQ</Link></li>
+                <li><Link href="/contact" className="hover:text-[#60c4ff] transition">Contact</Link></li>
+                <li><Link href="/privacy" className="hover:text-[#60c4ff] transition">Privacybeleid</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-gray-900">Volg ons</h3>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-[#60c4ff] transition">Facebook</a>
+                <a href="#" className="text-gray-400 hover:text-[#60c4ff] transition">Twitter</a>
+                <a href="#" className="text-gray-400 hover:text-[#60c4ff] transition">Instagram</a>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm">
+            <p>&copy; {new Date().getFullYear()} FaithFlow. Alle rechten voorbehouden.</p>
+          </div>
+        </div>
       </footer>
-    </div>
-  );
+    </main>
+  )
 }

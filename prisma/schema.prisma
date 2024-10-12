@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   Int                @id @default(autoincrement())
+  kindeId              String             @unique
+  email                String             @unique
+  firstName            String
+  lastName             String
+  isPremium            Boolean            @default(false)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  stripeSessionId      String?
+  subscriptionStatus   SubscriptionStatus @default(INACTIVE)
+}
+
+model Prayer {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String?
+  audioUrl     String
+  thumbnailUrl String
+  duration     String
+  createdAt    DateTime @default(now())
+  categoryId   Int
+  category     Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  iconName    String
+  imageUrl    String
+  prayers     Prayer[]
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELED
+  PENDING
+}
