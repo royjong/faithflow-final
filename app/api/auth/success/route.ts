@@ -27,7 +27,14 @@ export async function GET() {
         }
 
         return NextResponse.redirect(`https://main.d2q2f4v2d6ezrm.amplifyapp.com/dashboard`);
-    } catch (error) {
-        return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
+    } catch (error: any) {
+        // Log the error to the console
+        console.error("Error processing request:", error);
+
+        // Optionally send a more detailed error message to the client
+        return NextResponse.json({ 
+            error: 'Failed to process request', 
+            details: error.message // Include the error message for debugging
+        }, { status: 500 });
     }
 }
