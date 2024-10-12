@@ -2,7 +2,7 @@ import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export async function GET() {
     try {
         const { getUser } = getKindeServerSession();
         const user = await getUser();
