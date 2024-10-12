@@ -32,7 +32,7 @@ const Header = () => {
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center space-x-3">
                             <Image src='/faithflow.png' width={40} height={40} alt='FaithFlow logo' className="w-10 h-10" />
-                            <span className="text-2xl font-bold text-gray-900">FaithFlow</span>
+                            <span className="text-2xl font-bold text-gray-900">PrayStream</span>
                         </Link>
                     </div>
                     {isMobile ? (

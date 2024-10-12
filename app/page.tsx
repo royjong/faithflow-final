@@ -142,7 +142,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} FaithFlow. Alle rechten voorbehouden.</p>
+            <p>&copy; {new Date().getFullYear()} PrayStream. Alle rechten voorbehouden.</p>
           </div>
         </div>
       </footer>

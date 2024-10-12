@@ -34,7 +34,7 @@ const Sidebar = () => {
         <div className="w-72 bg-white dark:bg-gray-900 h-full border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-xl">
           <div className="flex items-center gap-3 justify-center h-24">
             <Image src='/faithflow.png' width={50} height={50} alt='FaithFlow' /> 
-            <h1 className="text-3xl font-bold text-[#60c4ff]">FaithFlow</h1>
+            <h1 className="text-3xl font-bold text-gray-800">PrayStream</h1>
           </div>
           <nav className="flex-1 overflow-y-auto pt-6">
             <ul className="px-4 space-y-2">
