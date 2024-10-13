@@ -14,24 +14,23 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SpiritSounds - Your Source for Christian Meditations and Prayers",
-  description: "Ontdek 100+ christelijke meditaties en gebeden. Begin je gratis proefperiode en versterk je spirituele reis met SpiritSounds.",
-  keywords: "christelijke meditatie, gebeden, spirituele groei, meditatie app, geestelijke gezondheid",
+  title: "SpiritSounds - De beste app voor Christelijke Meditaties en Gebeden",
+  description: "Ontdek meer dan 100 diepgaande christelijke meditaties en gebeden. Start je gratis proefperiode en versterk je spirituele reis met SpiritSounds. Verbeter je geestelijke gezondheid en vind rust.",
+  keywords: "christelijke meditatie, gebeden, spirituele groei, meditatie app, geestelijke gezondheid, mindfulness",
   creator: "SpiritSounds Team",
   robots: "index, follow",
   openGraph: {
-    title: "SpiritSounds",
-    description: "Ontdek 100+ christelijke meditaties en gebeden. Begin je gratis proefperiode en versterk je spirituele reis met SpiritSounds.",
-    url: "https://spiritsounds.com", // Replace with your actual URL
+    title: "SpiritSounds - Jouw bron voor christelijke meditaties",
+    description: "Ontdek meer dan 100 unieke meditaties en gebeden. Versterk je spirituele reis met SpiritSounds. Begin je gratis proefperiode vandaag!",
+    url: "https://spiritsounds.com",
     type: "website",
     images: [
       {
-        url: "https://i.ibb.co/8N97C29/Scherm-afbeelding-2024-10-13-om-20-51-11.png", // Replace with your image URL
+        url: "https://i.ibb.co/8N97C29/Scherm-afbeelding-2024-10-13-om-20-51-11.png",
         alt: "SpiritSounds Logo",
       },
     ],
   },
- 
 };
 
 export default function RootLayout({
