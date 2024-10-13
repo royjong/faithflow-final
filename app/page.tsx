@@ -34,7 +34,7 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
                 <Button size="lg" className="w-full sm:w-auto bg-[#60c4ff] text-white hover:bg-blue-600 transition shadow-lg text-lg py-6 px-8">
                   <Link href="/api/auth/login" className="flex items-center justify-center">
-                    Start je gratis reis
+                    Probeer 7 dagen gratis
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
