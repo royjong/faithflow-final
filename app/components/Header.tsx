@@ -72,7 +72,7 @@ const Header = () => {
                                 )}
                             </div>
                             {!user ? (
-                                <Button className="bg-[#60c4ff] text-white hover:bg-blue-600 transition-colors duration-300 shadow-md">
+                                <Button className="bg-[#009bf9] text-white hover:bg-blue-600 transition-colors duration-300 shadow-md">
                                     <Link href="/api/auth/login">Nu aanmelden</Link>
                                 </Button>
                             ) : (

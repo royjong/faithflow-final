@@ -16,7 +16,7 @@ export default async function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative py-[120px] md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
@@ -32,7 +32,7 @@ export default async function Home() {
                 Heb je moeite met bidden? Ontdek 100+ audio opgnomen geleide gebeden en christelijke meditaties op SpiritSounds
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
-                <Button size="lg" className="w-full sm:w-auto bg-[#60c4ff] text-white hover:bg-blue-600 transition shadow-lg text-lg py-6 px-8">
+                <Button size="lg" className="w-full sm:w-auto bg-[#009bf9] text-white hover:bg-[#003366] transition shadow-lg text-lg py-6 px-8">
                   <Link href="/api/auth/login" className="flex items-center justify-center">
                     Probeer 7 dagen gratis
                     <ArrowRight className="ml-2 h-5 w-5" />
