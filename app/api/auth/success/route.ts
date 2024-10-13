@@ -26,7 +26,7 @@ export async function GET() {
             });
         }
 
-        return NextResponse.redirect(`http://127.0.0.1:3000/dashboard`);
+        return NextResponse.redirect(`https://spiritsounds.nl/dashboard`);
     } catch (error: any) {
         // Log the error to the console
         console.error("Error processing request:", error);
