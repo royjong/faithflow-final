@@ -24,11 +24,29 @@ export async function POST(req: Request) {
   try {
     console.log('Received event type:', event.type);
 
-    if (event.type === 'checkout.session.completed') {
-      const session = event.data.object as Stripe.Checkout.Session;
-      await handleSuccessfulPayment(session);
-    } else {
-      console.log(`Unhandled event type ${event.type}`);
+    switch (event.type) {
+      case 'checkout.session.completed':
+        const checkoutSession = event.data.object as Stripe.Checkout.Session;
+        await handleCheckoutSessionCompleted(checkoutSession);
+        break;
+      case 'invoice.paid':
+        const invoice = event.data.object as Stripe.Invoice;
+        await handleInvoicePaid(invoice);
+        break;
+      case 'customer.subscription.updated':
+        const subscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionUpdated(subscription);
+        break;
+      case 'customer.subscription.deleted':
+        const deletedSubscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionDeleted(deletedSubscription);
+        break;
+      case 'customer.subscription.trial_will_end':
+        const trialEndingSubscription = event.data.object as Stripe.Subscription;
+        await handleTrialWillEnd(trialEndingSubscription);
+        break;
+      default:
+        console.log(`Unhandled event type ${event.type}`);
     }
 
     return NextResponse.json({ received: true });
@@ -38,11 +56,11 @@ export async function POST(req: Request) {
   }
 }
 
-async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
-  console.log('Processing successful payment:', session.id);
+async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
+  console.log('Processing successful checkout:', session.id);
 
-  if (!session.customer) {
-    console.error('No customer found in session');
+  if (!session.customer || !session.subscription) {
+    console.error('No customer or subscription found in session');
     return;
   }
 
@@ -58,16 +76,100 @@ async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
 
     console.log('Updating user:', user.id);
 
-    const updatedUser = await prisma.user.update({
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+
+    await prisma.user.update({
       where: { id: user.id },
       data: {
         isPremium: true,
-        subscriptionStatus: SubscriptionStatus.ACTIVE,
+        subscriptionStatus: SubscriptionStatus.TRIAL,
+        stripeSubscriptionId: subscription.id,
+        trialEndsAt: subscription.trial_end ? new Date(subscription.trial_end * 1000) : null,
       },
     });
 
-    console.log('Updated user to premium status:', updatedUser.id, updatedUser.isPremium);
+    console.log('Updated user to trial status:', user.id);
   } catch (error) {
     console.error('Error updating user:', error);
+  }
+}
+
+async function handleInvoicePaid(invoice: Stripe.Invoice) {
+  if (invoice.subscription) {
+    const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string);
+    await updateUserSubscriptionStatus(subscription);
+  }
+}
+
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  await updateUserSubscriptionStatus(subscription);
+}
+
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  const user = await prisma.user.findFirst({
+    where: { stripeCustomerId: subscription.customer as string },
+  });
+
+  if (user) {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        isPremium: false,
+        subscriptionStatus: SubscriptionStatus.CANCELED,
+        stripeSubscriptionId: null,
+        trialEndsAt: null,
+      },
+    });
+  }
+}
+
+async function updateUserSubscriptionStatus(subscription: Stripe.Subscription) {
+  const user = await prisma.user.findFirst({
+    where: { stripeCustomerId: subscription.customer as string },
+  });
+
+  if (user) {
+    let status: SubscriptionStatus;
+    switch (subscription.status) {
+      case 'trialing':
+        status = SubscriptionStatus.TRIAL;
+        break;
+      case 'active':
+        status = SubscriptionStatus.ACTIVE;
+        break;
+      case 'past_due':
+        status = SubscriptionStatus.PAST_DUE;
+        break;
+      case 'canceled':
+        status = SubscriptionStatus.CANCELED;
+        break;
+      default:
+        status = SubscriptionStatus.INACTIVE;
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        isPremium: status === SubscriptionStatus.ACTIVE || status === SubscriptionStatus.TRIAL,
+        subscriptionStatus: status,
+        stripeSubscriptionId: subscription.id,
+        trialEndsAt: subscription.trial_end ? new Date(subscription.trial_end * 1000) : null,
+      },
+    });
+  }
+}
+
+async function handleTrialWillEnd(subscription: Stripe.Subscription) {
+  const fullPriceId = subscription.metadata.full_price_id;
+  if (fullPriceId) {
+    await stripe.subscriptions.update(subscription.id, {
+      items: [
+        {
+          id: subscription.items.data[0].id,
+          price: fullPriceId,
+        },
+      ],
+      proration_behavior: 'create_prorations',
+    });
   }
 }

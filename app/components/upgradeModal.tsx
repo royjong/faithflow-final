@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Badge } from "@/components/ui/badge"
 import { Check, Sparkles, Zap, X } from "lucide-react"
 
 export function PremiumUpgradeModal() {
@@ -55,37 +56,40 @@ export function PremiumUpgradeModal() {
           Upgrade naar Premium
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[90vw] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto p-0 bg-white rounded-2xl shadow-2xl overflow-hidden border-0">
-        <div className="relative">
-          <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 bg-gradient-to-br from-[#60c4ff] to-blue-600 flex flex-col items-center justify-center px-4 sm:px-6">
+      <DialogContent className="w-[90vw] max-w-md md:max-w-lg lg:max-w-xl mx-auto p-0 bg-white rounded-2xl shadow-2xl overflow-hidden border-0">
+        <div className="relative bg-gradient-to-br from-[#60c4ff] to-blue-600 p-6 md:p-8">
+          <div className="flex items-center justify-between mb-4">
             <Image
               src="/faithflow.png"
               alt="FaithFlow Logo"
-              width={60}
-              height={60}
-              className="mb-3 sm:mb-4 sm:w-20 sm:h-20"
+              width={50}
+              height={50}
+              className="w-12 h-12 md:w-14 md:h-14"
             />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-1 sm:mb-2 text-shadow text-center">
-              Ontgrendel Premium
-            </h2>
-            <p className="text-blue-100 text-sm sm:text-base md:text-lg mb-2 md:mb-3 text-center">
-              Verrijk je spirituele reis met onbeperkte toegang
-            </p>
-            <div className="bg-white rounded-full py-1 px-4 sm:py-2 sm:px-6 inline-block shadow-lg">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#60c4ff]">€7,50</span>
-              <span className="text-sm sm:text-base md:text-lg text-gray-600 ml-1">/ maand</span>
-            </div>
+            <Badge className="bg-green-500 hover:bg-green-600 text-white text-xs md:text-sm px-2 py-1">
+              50% gedoneerd aan KWF
+            </Badge>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 text-shadow">
+            Probeer 7 dagen gratis
+          </h2>
+          <p className="text-blue-100 text-base md:text-lg mb-4">
+            Versterk je geloof en groei dichter naar God met volledige toegang.
+          </p>
+          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 inline-block">
+            <span className="text-white text-xl md:text-2xl font-bold">€7,50 / maand</span>
+            <span className="text-blue-100 text-sm md:text-base ml-2">na proefperiode</span>
           </div>
           <button
-            className="absolute top-2 right-2 text-white hover:text-gray-200 focus:outline-none"
+            className="absolute top-4 right-4 text-white/80 hover:text-white focus:outline-none transition-colors"
             onClick={closeModal}
           >
-            <X className="h-5 w-5 sm:h-6 sm:w-6" />
+            <X className="h-6 w-6" />
           </button>
         </div>
-        <div className="px-4 py-4 sm:px-6 sm:py-6 md:py-8 bg-gray-50">
-          <h3 className="text-md sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3 md:mb-4">Premium voordelen:</h3>
-          <ul className="space-y-2 sm:space-y-3">
+        <div className="p-6 md:p-8 bg-gray-50">
+          <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">Premium voordelen:</h3>
+          <ul className="space-y-3">
             {[
               "Alle gebedscategorieën",
               "Exclusieve meditaties",
@@ -94,19 +98,19 @@ export function PremiumUpgradeModal() {
             ].map((benefit: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center bg-white rounded-lg p-2 sm:p-3 md:p-4 shadow-sm transition-all duration-300 hover:shadow-md"
+                className="flex items-center bg-white rounded-lg p-3 md:p-4 shadow-sm transition-all duration-300 hover:shadow-md"
               >
-                <div className="bg-[#60c4ff] rounded-full p-1 mr-2 sm:mr-3">
-                  <Check className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                <div className="bg-[#60c4ff] rounded-full p-1 mr-3">
+                  <Check className="h-4 w-4 md:h-5 md:w-5 text-white" />
                 </div>
-                <span className="text-sm sm:text-base md:text-lg text-gray-700">{benefit}</span>
+                <span className="text-base md:text-lg text-gray-700">{benefit}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="bg-white px-4 py-3 sm:px-6 sm:py-4 md:py-5 border-t border-gray-100">
+        <div className="bg-white px-6 py-4 md:px-8 md:py-6 border-t border-gray-100">
           <Button 
-            className="w-full bg-gradient-to-r from-[#60c4ff] to-blue-600 text-white text-base sm:text-lg md:text-xl font-semibold py-3 sm:py-4 md:py-5 rounded-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
+            className="w-full bg-gradient-to-r from-[#60c4ff] to-blue-600 text-white text-lg md:text-xl font-semibold py-3 md:py-4 rounded-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
             onClick={handleUpgrade}
             disabled={isLoading}
           >
@@ -114,13 +118,13 @@ export function PremiumUpgradeModal() {
               "Laden..."
             ) : (
               <>
-                <Zap className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Upgrade nu naar Premium
+                <Zap className="mr-2 h-5 w-5 md:h-6 md:w-6" />
+                Start je gratis proefperiode
               </>
             )}
           </Button>
-          <p className="text-center text-xs sm:text-sm md:text-base text-gray-600 mt-2 sm:mt-3 font-medium">
-            30 dagen niet-goed-geld-terug garantie
+          <p className="text-center text-sm md:text-base text-gray-600 mt-3 font-medium">
+            Maandelijks opzegbaar – Geen verplichtingen, alleen zegeningen!
           </p>
         </div>
       </DialogContent>
