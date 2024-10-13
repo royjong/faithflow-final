@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://spiritsounds.com/image.jpg", // Replace with your image URL
+        url: "https://i.ibb.co/8N97C29/Scherm-afbeelding-2024-10-13-om-20-51-11.png", // Replace with your image URL
         alt: "SpiritSounds Logo",
       },
     ],
