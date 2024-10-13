@@ -1,19 +1,40 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { TrashIcon } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { TrashIcon } from "lucide-react";
+import { FC } from "react";
 
-export function PrayersTable({ prayers }) {
-  const deletePrayer = async (id: number) => {
-    const response = await fetch(`/api/admin/prayers/${id}`, {
-      method: 'DELETE',
-    });
-    if (response.ok) {
-      window.location.reload();
-    } else {
-      console.error('Failed to delete prayer');
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface Prayer {
+  id: number;
+  title: string;
+  category: Category;
+  duration: string;
+}
+
+interface PrayersTableProps {
+  prayers: Prayer[];
+}
+
+export const PrayersTable: FC<PrayersTableProps> = ({ prayers }) => {
+  const deletePrayer = async (id: number): Promise<void> => {
+    try {
+      const response = await fetch(`/api/admin/prayers/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error("Failed to delete prayer");
+      }
+    } catch (error) {
+      console.error("Error deleting prayer:", error);
     }
-  }
+  };
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-x-auto">
@@ -38,9 +59,7 @@ export function PrayersTable({ prayers }) {
           {prayers.map((prayer) => (
             <tr key={prayer.id}>
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p className="text-gray-900 whitespace-no-wrap">
-                  {prayer.title}
-                </p>
+                <p className="text-gray-900 whitespace-no-wrap">{prayer.title}</p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <p className="text-gray-900 whitespace-no-wrap">
@@ -48,9 +67,7 @@ export function PrayersTable({ prayers }) {
                 </p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p className="text-gray-900 whitespace-no-wrap">
-                  {prayer.duration}
-                </p>
+                <p className="text-gray-900 whitespace-no-wrap">{prayer.duration}</p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <Button
@@ -66,5 +83,5 @@ export function PrayersTable({ prayers }) {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
