@@ -1,10 +1,5 @@
-"use client";
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
-import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface AudioPlayerProps {
   audioSrc: string;
@@ -70,11 +65,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     onPlayPause();
   };
 
-  const handleSliderChange = (newValue: number[]) => {
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio || duration === 0) return;
 
-    const [value] = newValue;
+    const value = parseFloat(e.target.value);
     audio.currentTime = value;
     setCurrentTime(value);
   };
@@ -93,8 +88,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     audioRef.current.currentTime = Math.min(duration, audioRef.current.currentTime + 10);
   };
 
-  const handleVolumeChange = (newValue: number[]) => {
-    const [value] = newValue;
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
     setVolume(value);
     audioRef.current.volume = value;
     setIsMuted(value === 0);
@@ -114,15 +109,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     return (
       <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-md">
         <audio ref={audioRef} src={audioSrc} />
-        <Button variant="ghost" size="sm" onClick={togglePlayPause} className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
+        <button onClick={togglePlayPause} className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
           {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-        </Button>
-        <Slider
-          value={[currentTime]}
+        </button>
+        <input
+          type="range"
+          value={currentTime}
           max={duration}
           step={1}
-          onValueChange={handleSliderChange}
-          className="w-full max-w-[100px]"
+          onChange={handleSliderChange}
+          className="w-full max-w-[100px] accent-blue-500"
         />
         <span className="text-xs text-gray-500 dark:text-gray-400 min-w-[40px]">{formatTime(currentTime)}</span>
       </div>
@@ -133,40 +129,46 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
       <audio ref={audioRef} src={audioSrc} />
       <div className="flex items-center justify-between mb-4">
-        <Button variant="ghost" size="sm" onClick={skipBack} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
+        <button onClick={skipBack} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
           <SkipBack className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" size="lg" onClick={togglePlayPause} className={cn(
-          "w-12 h-12 rounded-full",
-          isPlaying ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-white text-blue-500 hover:bg-blue-50"
-        )}>
+        </button>
+        <button
+          onClick={togglePlayPause}
+          className={`w-12 h-12 rounded-full flex items-center justify-center ${
+            isPlaying
+              ? "bg-blue-500 text-white hover:bg-blue-600"
+              : "bg-white text-blue-500 hover:bg-blue-50 border border-blue-500"
+          }`}
+        >
           {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
-        </Button>
-        <Button variant="ghost" size="sm" onClick={skipForward} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
+        </button>
+        <button onClick={skipForward} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
           <SkipForward className="h-4 w-4" />
-        </Button>
+        </button>
       </div>
-      <Slider
-        value={[currentTime]}
+      <input
+        type="range"
+        value={currentTime}
         max={duration}
         step={1}
-        onValueChange={handleSliderChange}
-        className="mb-2"
+        onChange={handleSliderChange}
+        className="w-full mb-2 accent-blue-500"
       />
       <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
         <span>{formatTime(currentTime)}</span>
         <span>{formatTime(duration)}</span>
       </div>
       <div className="flex items-center space-x-2">
-        <Button variant="ghost" size="sm" onClick={toggleMute} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
+        <button onClick={toggleMute} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-        </Button>
-        <Slider
-          value={[isMuted ? 0 : volume]}
+        </button>
+        <input
+          type="range"
+          value={isMuted ? 0 : volume}
           max={1}
           step={0.01}
-          onValueChange={handleVolumeChange}
-          className="w-24"
+          onChange={handleVolumeChange}
+          className="w-24 accent-blue-500"
         />
       </div>
     </div>
