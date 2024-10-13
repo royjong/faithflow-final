@@ -147,68 +147,7 @@ export default async function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
-            Investeer in <span className="text-[#60c4ff]">Jouw Spirituele Groei</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Ontdekker",
-                price: "€4,99",
-                features: [
-                  "Toegang tot 100+ inspirerende gebeden",
-                  "Dagelijkse meditaties voor innerlijke rust",
-                  "Basis Bijbelstudies voor verdieping",
-                  "Mobiele app voor onderweg"
-                ]
-              },
-              {
-                name: "Groeier",
-                price: "€9,99",
-                features: [
-                  "Alles van Ontdekker",
-                  "Onbeperkte toegang tot premium content",
-                  "Exclusieve geleide meditaties",
-                  "Persoonlijke gebedsplanner",
-                  "Offline luisteren voor flexibiliteit"
-                ]
-              },
-              {
-                name: "Familiebond",
-                price: "€14,99",
-                features: [
-                  "Alles van Groeier",
-                  "Tot 6 individuele profielen",
-                  "Speciaal ontwikkelde gezinscontent",
-                  "Ouderlijk toezicht voor veiligheid",
-                  "Gedeelde gebedsdoelen voor verbinding"
-                ]
-              }
-            ].map((plan, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300">
-                <div className="p-8">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">{plan.name}</h3>
-                  <p className="text-4xl font-bold text-[#60c4ff] mb-6">{plan.price}<span className="text-base font-normal text-gray-600">/maand</span></p>
-                  <ul className="space-y-4 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <Check className="h-5 w-5 text-green-500 mr-2" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-[#60c4ff] text-white hover:bg-blue-600 transition py-6 text-lg font-semibold">
-                    Start je reis met {plan.name}
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
