@@ -38,7 +38,7 @@ const Header = () => {
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center space-x-2">
                             <Image src='/faithflow.png' width={40} height={40} alt='SpiritSounds logo' className="w-10 h-10" />
-                            <span className={`text-xl font-bold ${isScrolled ? 'text-gray-900' : 'text-gray-800'}`}>SpiritSounds</span>
+                            <span className={`text-md font-bold ${isScrolled ? 'text-gray-900' : 'text-gray-800'}`}>SpiritSounds</span>
                         </Link>
                     </div>
                     {isMobile ? (
@@ -57,7 +57,7 @@ const Header = () => {
                         <div className="flex items-center space-x-6">
                             <div className="relative group">
                                 <button
-                                    className={`flex items-center space-x-1 ${isScrolled ? 'text-gray-600 hover:text-blue-600' : 'text-white hover:text-blue-300'} transition-colors duration-300`}
+                                    className={`flex items-center space-x-1 ${isScrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-500 hover:text-blue-300'} transition-colors duration-300`}
                                     onClick={toggleDropdown}
                                 >
                                     <span>Ontdekken</span>
