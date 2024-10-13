@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Check, Sparkles, Zap } from "lucide-react"
+import { Check, Sparkles, Zap, X } from "lucide-react" // Import X for close icon
 import Image from 'next/image'
 
 export function PremiumUpgradeModal() {
@@ -115,6 +115,14 @@ export function PremiumUpgradeModal() {
             30 dagen niet-goed-geld-terug garantie
           </p>
         </div>
+        {/* Close Button */}
+        <Button 
+          variant="link" 
+          className="absolute top-2 right-2" 
+          onClick={() => { /* Logic to close modal */ }}
+        >
+          <X className="h-5 w-5 text-gray-700" />
+        </Button>
       </DialogContent>
     </Dialog>
   )
