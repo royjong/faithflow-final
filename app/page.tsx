@@ -19,7 +19,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
+              <h1 className="text-4xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
               Versterk je gebed en groei in geloof met <span className="text-[#60c4ff] relative">
                   SpiritSounds
                   <svg className="absolute w-full h-3 -bottom-2 left-0 text-[#60c4ff] opacity-30" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -27,7 +27,7 @@ export default async function Home() {
                   </svg>
                 </span>
               </h1>
-              <p className="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-md md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto lg:mx-0">
               Vind kracht en inspiratie in <b> 100+ </b>begeleide gebeden en christelijke meditaties, speciaal ontworpen om je geloofsleven te verdiepen
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
