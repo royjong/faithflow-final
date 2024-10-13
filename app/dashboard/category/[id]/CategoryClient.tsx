@@ -33,12 +33,14 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const handleAudioSelect = (audio: string) => {
-    setSelectedAudio(audio);
-    setIsPlaying(true);
-  };
-
-  const togglePlayPause = () => {
-    setIsPlaying(prevState => !prevState);
+    if (selectedAudio === audio) {
+      // If the selected audio is already playing, toggle play/pause
+      setIsPlaying((prev) => !prev);
+    } else {
+      // If a new audio is selected, set it and play
+      setSelectedAudio(audio);
+      setIsPlaying(true);
+    }
   };
 
   return (
@@ -73,8 +75,9 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
         ))}
       </div>
 
+      {/* Pass isPlaying state to AudioPlayer */}
       {selectedAudio && (
-        <AudioPlayer audioSrc={selectedAudio} />
+        <AudioPlayer audioSrc={selectedAudio} isPlaying={isPlaying} />
       )}
     </>
   );
