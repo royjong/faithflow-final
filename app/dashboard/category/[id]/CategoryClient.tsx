@@ -6,6 +6,7 @@ import { Play, Pause, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from '@/app/components/audioPlayer';
 
+// Define the types for Prayer based on your Prisma schema
 interface Prayer {
   id: number;
   title: string;
@@ -15,6 +16,7 @@ interface Prayer {
   duration: string;
 }
 
+// Define the props for CategoryClient
 interface CategoryClientProps {
   category: {
     id: number;
@@ -41,10 +43,10 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {prayers.map((prayer) => (
-          <div key={prayer.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-            <div className="relative h-48 sm:h-56">
+          <div key={prayer.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="relative h-48">
               <Image src={prayer.thumbnailUrl} alt={prayer.title} layout="fill" objectFit="cover" />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <Button
@@ -52,19 +54,19 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
                   className="bg-[#60c4ff] text-white hover:bg-blue-500 transition shadow"
                 >
                   {selectedAudio === prayer.audioUrl && isPlaying ? (
-                    <Pause className="h-6 w-6 sm:h-8 sm:w-8" />
+                    <Pause className="h-8 w-8" />
                   ) : (
-                    <Play className="h-6 w-6 sm:h-8 sm:w-8" />
+                    <Play className="h-8 w-8" />
                   )}
                 </Button>
               </div>
             </div>
-            <div className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{prayer.title}</h3>
-              <p className="text-sm sm:text-base text-gray-600 mb-4">{prayer.description}</p>
+            <div className="p-4">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{prayer.title}</h3>
+              <p className="text-gray-600 mb-4">{prayer.description}</p>
               <div className="flex items-center text-gray-500">
                 <Clock className="h-4 w-4 mr-2" />
-                <span className="text-sm">{prayer.duration}</span>
+                <span>{prayer.duration}</span>
               </div>
             </div>
           </div>
@@ -72,9 +74,7 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
       </div>
 
       {selectedAudio && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4">
-          <AudioPlayer audioSrc={selectedAudio} isPlaying={isPlaying} onTogglePlayPause={togglePlayPause} />
-        </div>
+        <AudioPlayer audioSrc={selectedAudio} />
       )}
     </>
   );
