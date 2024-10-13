@@ -10,13 +10,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Check, Sparkles, Zap, X } from "lucide-react" // Import X for close icon
+import { Check, Sparkles, Zap, X } from "lucide-react"
 import Image from 'next/image'
 
 export function PremiumUpgradeModal() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false) // State to manage the dialog open/close
 
-  const handleUpgrade = async () => {
+  const handleUpgrade = async (): Promise<void> => {
     setIsLoading(true)
     try {
       const response = await fetch('/api/stripe', {
@@ -38,14 +39,14 @@ export function PremiumUpgradeModal() {
       }
     } catch (error) {
       console.error('Error creating checkout session:', error)
-      // You might want to show an error message to the user here
+      // Optionally show an error message to the user here
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button 
           variant="outline" 
@@ -86,7 +87,7 @@ export function PremiumUpgradeModal() {
               "Exclusieve meditaties",
               "Dagelijkse inspiratie",
               "Persoonlijke gebedstracker"
-            ].map((benefit, index) => (
+            ].map((benefit: string, index: number) => (
               <li key={index} className="flex items-center bg-white rounded-lg p-2 shadow-sm">
                 <div className="bg-[#60c4ff] rounded-full p-1 mr-3">
                   <Check className="h-3 w-3 md:h-4 md:w-4 text-white" />
@@ -119,7 +120,7 @@ export function PremiumUpgradeModal() {
         <Button 
           variant="link" 
           className="absolute top-2 right-2" 
-          onClick={() => { /* Logic to close modal */ }}
+          onClick={() => setIsOpen(false)} // Logic to close the modal
         >
           <X className="h-5 w-5 text-gray-700" />
         </Button>
