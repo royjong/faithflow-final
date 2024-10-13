@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight, Headphones, Book, Heart, Play, Star, Users, Zap, Check, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Header from './components/Header'
-import AudioPlayer from './components/audioPlayer'
 import prisma from './lib/db'
 
 export default async function Home() {
@@ -59,12 +58,7 @@ export default async function Home() {
                     height={400} 
                     className="rounded-2xl shadow-2xl w-full h-auto"
                   />
-                  {randomPrayer && (
-                    <div className="absolute -bottom-10 -left-10 bg-white p-4 md:p-6 rounded-2xl shadow-xl w-full max-w-sm transform hover:scale-105 transition-transform duration-300">
-                      <h3 className="text-base md:text-lg font-semibold mb-2 truncate">{randomPrayer.title}</h3>
-                      <AudioPlayer audioSrc={randomPrayer.audioUrl} compact={true} />
-                    </div>
-                  )}
+                 
                 </div>
               </div>
             </div>
