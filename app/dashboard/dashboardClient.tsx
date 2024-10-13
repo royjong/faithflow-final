@@ -82,18 +82,20 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
               className={`group relative overflow-hidden rounded-3xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl ${
                 isLocked ? 'cursor-not-allowed' : 'cursor-pointer'
               }`}
+              style={{ overflow: 'hidden' }}  // Make sure overflow is hidden on the container
             >
-              <Image
-                src={category.imageUrl}
-                alt={category.name}
-                layout="responsive"
-                width={700}
-                height={475}
-                objectFit="cover"
-                className="transition-transform duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#60c4ff] to-blue-600 opacity-40 transition-opacity group-hover:opacity-50" />
-              <div className="absolute inset-0 bg-black opacity-40 transition-opacity group-hover:opacity-80" />
+              {/* Use div with background-image instead of Image component for better control */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                style={{
+                  backgroundImage: `url(${category.imageUrl})`,
+                  borderRadius: '1.5rem',
+                }}
+              ></div>
+
+              <div className="absolute inset-0 bg-gradient-to-br from-[#60c4ff] to-blue-600 opacity-40 transition-opacity group-hover:opacity-50 rounded-3xl" />
+              <div className="absolute inset-0 bg-black opacity-40 transition-opacity group-hover:opacity-80 rounded-3xl" />
+
               <div className="relative p-4 sm:p-6 md:p-8 flex flex-col h-full justify-between z-10">
                 <div>
                   <div className="bg-white bg-opacity-40 rounded-full p-2 sm:p-3 inline-block mb-2 sm:mb-4">
