@@ -13,11 +13,10 @@ import dynamic from 'next/dynamic';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
-// Update the Category type to allow 'description' to be 'string | null'
 interface Category {
   id: string;
   name: string;
-  description: string | null;  // Update: Allow null for description
+  description: string | null;
   imageUrl: string;
   iconName: string;
 }
@@ -57,7 +56,7 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
   useEffect(() => {
     const filtered = categories.filter((category) =>
       category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (category.description && category.description.toLowerCase().includes(searchTerm.toLowerCase())) // Handle null description
+      (category.description && category.description.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     setFilteredCategories(filtered);
   }, [searchTerm, categories]);
@@ -84,8 +83,6 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
                 isLocked ? 'cursor-not-allowed' : 'cursor-pointer'
               }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#60c4ff] to-blue-600 opacity-90 transition-opacity group-hover:opacity-95" />
-              <div className="absolute inset-0 bg-black opacity-50" />
               <Image
                 src={category.imageUrl}
                 alt={category.name}
@@ -93,14 +90,16 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
                 objectFit="cover"
                 className="transition-transform duration-300 group-hover:scale-110"
               />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#60c4ff] to-blue-600 opacity-40 transition-opacity group-hover:opacity-50" />
+              <div className="absolute inset-0 bg-black opacity-40 transition-opacity group-hover:opacity-80" />
               <div className="relative p-8 flex flex-col h-full justify-between z-10">
                 <div>
-                  <div className="bg-white bg-opacity-20 rounded-full p-3 inline-block mb-4">
+                  <div className="bg-white bg-opacity-40 rounded-full p-3 inline-block mb-4">
                     <Icon className="h-10 w-10 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-3">{category.name}</h3>
-                  <p className="text-blue-100 text-lg mb-6">
-                    {category.description ? category.description : 'Geen beschrijving beschikbaar'} {/* Handle null description */}
+                  <p className="text-blue-50 text-lg mb-6">
+                    {category.description ? category.description : 'Geen beschrijving beschikbaar'}
                   </p>
                 </div>
                 {isLocked ? (

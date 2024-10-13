@@ -26,7 +26,7 @@ export async function GET() {
             });
         }
 
-        return NextResponse.redirect(`https://main.d2q2f4v2d6ezrm.amplifyapp.com/dashboard`);
+        return NextResponse.redirect(`http://127.0.0.1:3000/dashboard`);
     } catch (error: any) {
         // Log the error to the console
         console.error("Error processing request:", error);

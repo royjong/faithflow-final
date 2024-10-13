@@ -32,8 +32,8 @@ export default async function Home() {
                 Heb je moeite met bidden? Ontdek 100+ audio opgnomen geleide gebeden en christelijke meditaties op SpiritSounds
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
-                <Button size="lg" className="w-full sm:w-auto bg-[#009bf9] text-white hover:bg-[#003366] transition shadow-lg text-lg py-6 px-8">
-                  <Link href="/api/auth/login" className="flex items-center justify-center">
+                <Button size="lg" className="w-full sm:w-auto bg-[#009bf9] text-white hover:bg-[#003366] transition shadow-lg text-lg py-6 px-8" asChild>
+                  <Link href="/api/auth/register" className="flex items-center justify-center ">
                     Probeer 7 dagen gratis
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
