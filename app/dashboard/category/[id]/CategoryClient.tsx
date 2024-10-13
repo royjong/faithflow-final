@@ -1,9 +1,6 @@
-"use client";
-
 import { useState } from 'react';
 import Image from 'next/image';
 import { Play, Pause, Clock } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import AudioPlayer from '@/app/components/audioPlayer';
 
 interface Prayer {
@@ -51,16 +48,16 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
             <div className="relative h-48">
               <Image src={prayer.thumbnailUrl} alt={prayer.title} layout="fill" objectFit="cover" />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <Button
+                <button
                   onClick={() => handleAudioSelect(prayer.audioUrl)}
-                  className="bg-[#60c4ff] text-white hover:bg-blue-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="bg-[#60c4ff] text-white hover:bg-blue-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 rounded-full p-3"
                 >
                   {selectedAudio === prayer.audioUrl && isPlaying ? (
                     <Pause className="h-8 w-8" />
                   ) : (
                     <Play className="h-8 w-8" />
                   )}
-                </Button>
+                </button>
               </div>
             </div>
             <div className="p-4">

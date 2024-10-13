@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from "@/components/ui/button";
+import { ArrowLeft } from 'lucide-react';
 import { getDynamicIcon } from '@/utils/iconUtils';
 import prisma from '@/app/lib/db';
 import CategoryClient from './CategoryClient';
-import { ArrowLeft } from 'lucide-react';
 
 export default async function CategoryPage({ params }: { params: { id: string } }) {
   const categoryId = parseInt(params.id);
@@ -28,13 +27,12 @@ export default async function CategoryPage({ params }: { params: { id: string } 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
       <Link href="/dashboard" className="inline-block mb-4 sm:mb-6">
-        <Button
-          variant="ghost"
-          className="text-[#60c4ff] hover:text-blue-700 transition-colors duration-200 text-sm sm:text-base"
+        <button
+          className="text-[#60c4ff] hover:text-blue-700 transition-colors duration-200 text-sm sm:text-base flex items-center"
         >
           <ArrowLeft className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
           Terug naar Dashboard
-        </Button>
+        </button>
       </Link>
       
       <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg mb-6 sm:mb-8 lg:mb-12">
