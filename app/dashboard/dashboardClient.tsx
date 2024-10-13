@@ -71,7 +71,7 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
       {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
       <ThankYouModal isOpen={showThankYouModal} onClose={handleCloseThankYouModal} />
 
-      <div className="grid grid-cols-1 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"> {/* Updated grid classes */}
         {filteredCategories.map((category, index) => {
           const Icon = getDynamicIcon(category.iconName) as React.FC<{ className?: string }>;
           const isLocked = !isPremium && index >= 3;
