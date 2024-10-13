@@ -42,13 +42,17 @@ const Header = () => {
                         </Link>
                     </div>
                     {isMobile ? (
-                        <button
-                            onClick={toggleMobileMenu}
-                            className={`${isScrolled ? 'text-gray-600 hover:text-blue-600' : 'text-white hover:text-blue-300'} transition-colors duration-300`}
-                            aria-label="Toggle mobile menu"
-                        >
-                            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                        </button>
+                       <button
+                       onClick={toggleMobileMenu}
+                       className={`${isScrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-600 hover:text-blue-300'} transition-colors duration-300`}
+                       aria-label="Toggle mobile menu"
+                   >
+                       {isMobileMenuOpen ? (
+                           <X className={`${isScrolled ? 'text-gray-600' : 'text-white'} w-6 h-6`} />
+                       ) : (
+                           <Menu className={`${isScrolled ? 'text-gray-600' : 'text-gray-600'} w-6 h-6`} />
+                       )}
+                   </button>
                     ) : (
                         <div className="flex items-center space-x-6">
                             <div className="relative group">
@@ -98,7 +102,7 @@ const Header = () => {
                         <Link href="/meditaties" className="block text-gray-700 hover:text-blue-500 py-2">Meditaties</Link>
                         <Link href="/bijbelstudies" className="block text-gray-700 hover:text-blue-500 py-2">Bijbelstudies</Link>
                         {!user ? (
-                            <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 shadow-md">
+                            <Button className="w-full bg-[#60c4ff] text-white hover:bg-blue-600 transition-colors duration-300 shadow-md">
                                 <Link href="/api/auth/login">Nu aanmelden</Link>
                             </Button>
                         ) : (
