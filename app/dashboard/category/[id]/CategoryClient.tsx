@@ -6,7 +6,6 @@ import { Play, Pause, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from '@/app/components/audioPlayer';
 
-// Define the types for Prayer based on your Prisma schema
 interface Prayer {
   id: number;
   title: string;
@@ -16,7 +15,6 @@ interface Prayer {
   duration: string;
 }
 
-// Define the props for CategoryClient
 interface CategoryClientProps {
   category: {
     id: number;
@@ -34,26 +32,28 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
 
   const handleAudioSelect = (audio: string) => {
     if (selectedAudio === audio) {
-      // If the selected audio is already playing, toggle play/pause
       setIsPlaying((prev) => !prev);
     } else {
-      // If a new audio is selected, set it and play
       setSelectedAudio(audio);
       setIsPlaying(true);
     }
+  };
+
+  const handlePlayPause = () => {
+    setIsPlaying((prev) => !prev);
   };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {prayers.map((prayer) => (
-          <div key={prayer.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div key={prayer.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
             <div className="relative h-48">
               <Image src={prayer.thumbnailUrl} alt={prayer.title} layout="fill" objectFit="cover" />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <Button
                   onClick={() => handleAudioSelect(prayer.audioUrl)}
-                  className="bg-[#60c4ff] text-white hover:bg-blue-500 transition shadow"
+                  className="bg-[#60c4ff] text-white hover:bg-blue-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {selectedAudio === prayer.audioUrl && isPlaying ? (
                     <Pause className="h-8 w-8" />
@@ -64,9 +64,9 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
               </div>
             </div>
             <div className="p-4">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{prayer.title}</h3>
-              <p className="text-gray-600 mb-4">{prayer.description}</p>
-              <div className="flex items-center text-gray-500">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{prayer.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{prayer.description}</p>
+              <div className="flex items-center text-gray-500 dark:text-gray-400">
                 <Clock className="h-4 w-4 mr-2" />
                 <span>{prayer.duration}</span>
               </div>
@@ -75,9 +75,14 @@ export default function CategoryClient({ category, prayers }: CategoryClientProp
         ))}
       </div>
 
-      {/* Pass isPlaying state to AudioPlayer */}
       {selectedAudio && (
-        <AudioPlayer audioSrc={selectedAudio} isPlaying={isPlaying} />
+        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg">
+          <AudioPlayer
+            audioSrc={selectedAudio}
+            isPlaying={isPlaying}
+            onPlayPause={handlePlayPause}
+          />
+        </div>
       )}
     </>
   );
