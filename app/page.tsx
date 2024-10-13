@@ -146,8 +146,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">

@@ -8,17 +8,26 @@ import { cn } from "@/lib/utils";
 
 interface AudioPlayerProps {
   audioSrc: string;
-  isPlaying: boolean;
-  onPlayPause: () => void;
+  isPlaying?: boolean;
+  onPlayPause?: () => void;
   compact?: boolean;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, isPlaying, onPlayPause, compact = false }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ 
+  audioSrc, 
+  isPlaying: externalIsPlaying, 
+  onPlayPause: externalOnPlayPause, 
+  compact = false 
+}) => {
+  const [internalIsPlaying, setInternalIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(new Audio(audioSrc));
+
+  const isPlaying = externalIsPlaying !== undefined ? externalIsPlaying : internalIsPlaying;
+  const onPlayPause = externalOnPlayPause || (() => setInternalIsPlaying(!internalIsPlaying));
 
   useEffect(() => {
     const audio = audioRef.current;
