@@ -19,27 +19,27 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
-                Versterk je geloof met <span className="text-[#60c4ff] relative">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
+              Versterk je gebed en groei in geloof met <span className="text-[#60c4ff] relative">
                   SpiritSounds
                   <svg className="absolute w-full h-3 -bottom-2 left-0 text-[#60c4ff] opacity-30" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="4" fill="none" />
                   </svg>
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl mb-10 text-gray-600 max-w-2xl mx-auto lg:mx-0">
-                Heb je moeite met bidden? Ontdek 100+ audio opgnomen geleide gebeden en christelijke meditaties op SpiritSounds
+              <p className="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto lg:mx-0">
+              Vind kracht en inspiratie in <b> 100+ </b>begeleide gebeden en christelijke meditaties, speciaal ontworpen om je geloofsleven te verdiepen
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
                 <Button size="lg" className="w-full sm:w-auto bg-[#009bf9] text-white hover:bg-[#003366] transition shadow-lg text-lg py-6 px-8" asChild>
                   <Link href="/api/auth/register" className="flex items-center justify-center ">
-                    Probeer 7 dagen gratis
+                   Start je 7-daagse gratis proefperiode
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-[#60c4ff] text-[#60c4ff] hover:bg-blue-50 transition shadow-lg text-lg py-6 px-8">
                   <Link href="/learn-more" className="flex items-center justify-center">
-                    Ontdek meer
+                  Leer meer over SpiritSounds
                     <Play className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
@@ -74,9 +74,9 @@ export default async function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {[
-              { icon: Headphones, title: "Persoonlijke Gebedsbegeleiding", description: "Laat je inspireren door stemmen die je helpen focussen op wat echt belangrijk is." },
-              { icon: Heart, title: "Diepgaande Meditaties", description: "Vind innerlijke rust en versterk je band met God door zorgvuldig samengestelde christelijke meditaties." },
-              { icon: Book, title: "Interactieve Bijbelstudies", description: "Verrijk je kennis en inzicht in de Schrift met onze boeiende audio-begeleide Bijbelstudies." }
+              { icon: Headphones, title: "Persoonlijke Gebedsbegeleiding", description: "Laat je leiden in gebed met inspirerende stemmen die je helpen om dichter bij God te komen." },
+              { icon: Heart, title: "Diepgaande Meditaties", description: "Kom tot rust in de aanwezigheid van God en versterk je relatie met Hem door opbouwende, op geloof gebaseerde meditaties." },
+              { icon: Book, title: "Interactieve Bijbelstudies", description: "Verdiep je kennis van de Bijbel met onze boeiende, audio-geleide Bijbelstudies, speciaal gemaakt om je geloof te verrijken" }
             ].map((feature, index) => (
               <div key={index} className="flex flex-col items-center text-center group bg-blue-50 rounded-lg p-8 transition-all duration-300 hover:bg-blue-100 hover:shadow-xl">
                 <div className="bg-[#60c4ff] p-5 rounded-full mb-6 transition-all duration-300 group-hover:shadow-lg group-hover:scale-110">
@@ -96,9 +96,7 @@ export default async function Home() {
       {/* Testimonials Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Transformerende <span className="text-yellow-300">Ervaringen</span>
-          </h2>
+         
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: "Anna B.", quote: "SpiritSounds heeft mijn gebedsleven compleet getransformeerd. Ik voel me elke dag dichter bij God." },
@@ -124,9 +122,9 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {[
-              { icon: Users, value: "100,000+", label: "Geïnspireerde Gebruikers" },
-              { icon: Headphones, value: "500+", label: "Unieke Spirituele Ervaringen" },
-              { icon: Zap, value: "1M+", label: "Minuten van Verdieping" }
+              { icon: Users, value: "1000+", label: "Tevreden gebruikers die hun geloofsreis hebben versterkt." },
+              { icon: Headphones, value: "300+", label: "Unieke, op geloof gebaseerde meditaties en gebeden" },
+              { icon: Zap, value: "100.000+", label: "Minuten aan spiritueel verrijkende audio-inhoud." }
             ].map((stat, index) => (
               <div key={index} className="flex flex-col items-center group">
                 <div className="bg-[#60c4ff] p-4 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -143,11 +141,11 @@ export default async function Home() {
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Klaar voor een Diepere Connectie?</h2>
-          <p className="text-xl mb-10">Ontdek de kracht van begeleide gebeden en meditaties. Transformeer je spirituele reis vandaag nog met SpiritSounds.</p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Ben je klaar om je geloof te verdiepen?</h2>
+          <p className="text-xl mb-10">Ontdek de kracht van gebed en christelijke meditaties en transformeer je geloofsreis vandaag nog.</p>
           <Button size="lg" className="w-full sm:w-auto bg-white text-blue-600 hover:bg-blue-50 transition shadow-lg text-lg py-6 px-12 group">
             <Link href="/api/auth/login" className="flex items-center justify-center">
-              Begin Je Gratis Proefperiode
+            Start je gratis proefperiode vandaag nog
               <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>

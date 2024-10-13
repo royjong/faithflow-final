@@ -19,12 +19,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(new Audio(audioSrc));
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const isPlaying = externalIsPlaying !== undefined ? externalIsPlaying : internalIsPlaying;
   const onPlayPause = externalOnPlayPause || (() => setInternalIsPlaying(!internalIsPlaying));
 
   useEffect(() => {
+    audioRef.current = new Audio(audioSrc);
     const audio = audioRef.current;
 
     const handleLoadedData = () => {
@@ -43,21 +44,22 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.pause();
     };
-  }, []);
+  }, [audioSrc]);
 
   useEffect(() => {
-    audioRef.current.src = audioSrc;
-    setCurrentTime(0);
-    setDuration(0);
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isPlaying) {
-      audioRef.current.play();
+      audio.play().catch(error => console.error('Error playing audio:', error));
     } else {
-      audioRef.current.pause();
+      audio.pause();
     }
 
     return () => {
-      audioRef.current.pause();
+      if (audio) {
+        audio.pause();
+      }
     };
   }, [audioSrc, isPlaying]);
 
@@ -81,26 +83,35 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   };
 
   const skipBack = () => {
-    audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
   };
 
   const skipForward = () => {
-    audioRef.current.currentTime = Math.min(duration, audioRef.current.currentTime + 10);
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Math.min(duration, audio.currentTime + 10);
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     setVolume(value);
-    audioRef.current.volume = value;
+    if (audioRef.current) {
+      audioRef.current.volume = value;
+    }
     setIsMuted(value === 0);
   };
 
   const toggleMute = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
     if (isMuted) {
-      audioRef.current.volume = volume;
+      audio.volume = volume;
       setIsMuted(false);
     } else {
-      audioRef.current.volume = 0;
+      audio.volume = 0;
       setIsMuted(true);
     }
   };
@@ -108,7 +119,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   if (compact) {
     return (
       <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-md">
-        <audio ref={audioRef} src={audioSrc} />
         <button onClick={togglePlayPause} className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
           {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
         </button>
@@ -127,7 +137,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-      <audio ref={audioRef} src={audioSrc} />
       <div className="flex items-center justify-between mb-4">
         <button onClick={skipBack} className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
           <SkipBack className="h-4 w-4" />
