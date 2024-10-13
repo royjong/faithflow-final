@@ -67,11 +67,11 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-4 md:px-8">
       {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
       <ThankYouModal isOpen={showThankYouModal} onClose={handleCloseThankYouModal} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {filteredCategories.map((category, index) => {
           const Icon = getDynamicIcon(category.iconName) as React.FC<{ className?: string }>;
           const isLocked = !isPremium && index >= 3;
@@ -86,39 +86,41 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
               <Image
                 src={category.imageUrl}
                 alt={category.name}
-                layout="fill"
+                layout="responsive"
+                width={700}
+                height={475}
                 objectFit="cover"
                 className="transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-[#60c4ff] to-blue-600 opacity-40 transition-opacity group-hover:opacity-50" />
               <div className="absolute inset-0 bg-black opacity-40 transition-opacity group-hover:opacity-80" />
-              <div className="relative p-8 flex flex-col h-full justify-between z-10">
+              <div className="relative p-4 sm:p-6 md:p-8 flex flex-col h-full justify-between z-10">
                 <div>
-                  <div className="bg-white bg-opacity-40 rounded-full p-3 inline-block mb-4">
-                    <Icon className="h-10 w-10 text-white" />
+                  <div className="bg-white bg-opacity-40 rounded-full p-2 sm:p-3 inline-block mb-2 sm:mb-4">
+                    <Icon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold text-white mb-3">{category.name}</h3>
-                  <p className="text-blue-50 text-lg mb-6">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">{category.name}</h3>
+                  <p className="text-blue-50 text-sm sm:text-lg mb-4 sm:mb-6">
                     {category.description ? category.description : 'Geen beschrijving beschikbaar'}
                   </p>
                 </div>
                 {isLocked ? (
                   <div className="flex items-center justify-between">
                     <PremiumUpgradeModal />
-                    <Lock className="h-6 w-6 text-white opacity-75" />
+                    <Lock className="h-5 sm:h-6 w-5 sm:w-6 text-white opacity-75" />
                   </div>
                 ) : (
                   <Link href={`/dashboard/category/${category.id}`} className="w-full">
-                    <Button className="w-full bg-white text-[#60c4ff] hover:bg-[#60c4ff] hover:text-white transition-all duration-300 shadow-md group text-lg py-6 font-semibold rounded-xl border-2 border-white">
-                      <span className="mr-2">Bekijk categorie</span>
-                      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <Button className="w-full bg-white text-[#60c4ff] hover:bg-[#60c4ff] hover:text-white transition-all duration-300 shadow-md group text-base sm:text-lg py-4 sm:py-6 font-semibold rounded-xl border-2 border-white">
+                      <span className="mr-1 sm:mr-2">Bekijk categorie</span>
+                      <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
                 )}
               </div>
               {isLocked && (
-                <div className="absolute top-6 right-6 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center shadow-md">
-                  <Sparkles className="h-4 w-4 mr-1" />
+                <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 text-yellow-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold flex items-center shadow-md">
+                  <Sparkles className="h-3 sm:h-4 w-3 sm:w-4 mr-1" />
                   Premium
                 </div>
               )}
@@ -128,8 +130,8 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ initialCategories, is
       </div>
 
       {filteredCategories.length === 0 && (
-        <div className="text-center py-12">
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">Geen categorieën gevonden</h3>
+        <div className="text-center py-8 sm:py-12">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-4">Geen categorieën gevonden</h3>
           <p className="text-gray-500">Probeer een andere zoekterm of verken onze beschikbare categorieën.</p>
         </div>
       )}
