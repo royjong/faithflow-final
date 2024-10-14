@@ -65,8 +65,8 @@ const Header = () => {
                                 </button>
                                 {isDropdownOpen && (
                                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                                        <Link href="/gebeden" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Gebeden</Link>
-                                        <Link href="/meditaties" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Meditaties</Link>
+                                        <Link href="/pages/gebeden" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Gebeden</Link>
+                                        <Link href="/pages//meditaties" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Meditaties</Link>
                                         <Link href="/bijbelstudies" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Bijbelstudies</Link>
                                     </div>
                                 )}
